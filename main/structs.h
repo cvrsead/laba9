@@ -114,3 +114,55 @@ void removeDuplicates(vector<int>& arr) {
 		j++;
 	}
 }
+
+void merge(vector<int>& arr, int left, int mid, int right) {
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
+
+	vector<int> L(n1);
+	vector<int> R(n2);
+
+	for (int j = 0; j < n1; j++) {
+		L[j] = arr[left + j];
+	}
+	for (int j = 0; j < n2; j++) {
+		R[j] = arr[mid + 1 + j];
+	}
+
+	int o = 0, j = 0, k = left;
+	while (o < n1 && j < n2) {
+		if (L[o] <= R[j]) {
+			arr[k] = L[o];
+			o++;
+		}
+		else {
+			arr[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (o < n1) {
+		arr[k] = L[o];
+		o++;
+		k++;
+	}
+
+	while (j < n2) {
+		arr[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+void mergeSort(vector<int>& arr, int left, int right) {
+	if (left < right) {
+		int mid = left + (right - left) / 2;
+
+		mergeSort(arr, left, mid);
+		mergeSort(arr, mid + 1, right);
+
+		merge(arr, left, mid, right);
+	}
+}
+
