@@ -6,7 +6,7 @@
 using namespace std;
 
 ofstream fout("out.txt", ios::app);
-ifstream fin("data.txt", ios::in);
+ifstream fin("data.txt", ios::app);
 
 struct time {
 	int hours;
@@ -51,12 +51,12 @@ void output(struct doclad work) {
 	
 	fout << work.start.hours << ":";
 	if (work.start.minutes<10)
-		fout << work.start.minutes << "0 ";
+		fout << "0" << work.start.minutes << " ";
 	else 
 		fout << work.start.minutes << " ";
 	fout << work.end.hours << ":";
 	if (work.end.minutes < 10)
-		fout << work.end.minutes << "0 ";
+		fout << "0" << work.end.minutes << " ";
 	else
 		fout << work.end.minutes << " ";
 	fout << work.surname << " " << work.name << " " << work.otchestvo << " " << work.project << endl;
