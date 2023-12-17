@@ -1,7 +1,8 @@
-#include <iostream>
-using namespace std;
-
+#include "consts.h"
+#include "structs.h"
 int main(){
-  cout << "Variant 2. \nConference program. \nZalesski Ivan";
+  setlocale(LC_ALL, "Russian");
+  cout << "Variant 2. \nConference program. \nZalesski Ivan\n";
+  output(input());
   return 0;
 }
