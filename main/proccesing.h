@@ -1,1 +1,5 @@
-#pragma once
+#include "structs.h"
+struct time process() {
+
+
+}
