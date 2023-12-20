@@ -12,60 +12,57 @@ namespace unittest
 		
 		TEST_METHOD(TestMethod1)
 		{
-			struct doclad a;
-			struct doclad b;
-			struct doclad c;
-			a.end.hours = 13;
-			a.start.hours = 12;
-			a.end.minutes = 0;
-			a.start.minutes = 40;
-			b.end.hours = 16;
-			b.start.hours = 16;
-			b.end.minutes = 40;
-			b.start.minutes = 10;
-			c.end.hours = 15;
-			c.start.hours = 15;
-			c.end.minutes = 40;
-			c.start.minutes = 30;
-			Assert::AreEqual(30, process(a,b,c));
+			int i = 3;
+			doclad* arr = new doclad[i];
+			arr[0].start.hours = 11;
+			arr[0].end.hours = 12;
+			arr[0].start.minutes = 30;
+			arr[0].end.minutes = 0;
+			arr[1].start.hours = 14;
+			arr[1].end.hours = 14;
+			arr[1].start.minutes = 10;
+			arr[1].end.minutes = 20;
+			arr[2].start.hours = 11;
+			arr[2].end.hours = 11;
+			arr[2].start.minutes = 20;
+			arr[2].end.minutes = 30;
+			Assert::AreEqual(30, process(arr, i));
 		}
 		TEST_METHOD(TestMethod2)
 		{
-			struct doclad a;
-			struct doclad b;
-			struct doclad c;
-			a.end.hours = 14;
-			a.start.hours = 12;
-			a.end.minutes = 0;
-			a.start.minutes = 40;
-			b.end.hours = 16;
-			b.start.hours = 16;
-			b.end.minutes = 38;
-			b.start.minutes = 14;
-			c.end.hours = 15;
-			c.start.hours = 15;
-			c.end.minutes = 40;
-			c.start.minutes = 27;
-			Assert::AreEqual(80, process(a, b, c));
+			int i = 3;
+			doclad* arr = new doclad[i];
+			arr[0].start.hours = 11;
+			arr[0].end.hours = 13;
+			arr[0].start.minutes = 30;
+			arr[0].end.minutes = 0;
+			arr[1].start.hours = 14;
+			arr[1].end.hours = 14;
+			arr[1].start.minutes = 10;
+			arr[1].end.minutes = 20;
+			arr[2].start.hours = 11;
+			arr[2].end.hours = 11;
+			arr[2].start.minutes = 20;
+			arr[2].end.minutes = 30;
+			Assert::AreEqual(90, process(arr, i));
 		}
 		TEST_METHOD(TestMethod3)
 		{
-			struct doclad a;
-			struct doclad b;
-			struct doclad c;
-			a.end.hours = 14;
-			a.start.hours = 12;
-			a.end.minutes = 0;
-			a.start.minutes = 40;
-			b.end.hours = 16;
-			b.start.hours = 16;
-			b.end.minutes = 38;
-			b.start.minutes = 14;
-			c.end.hours = 19;
-			c.start.hours = 15;
-			c.end.minutes = 40;
-			c.start.minutes = 27;
-			Assert::AreEqual(253, process(a, b, c));
+			int i = 3;
+			doclad* arr = new doclad[i];
+			arr[0].start.hours = 11;
+			arr[0].end.hours = 12;
+			arr[0].start.minutes = 30;
+			arr[0].end.minutes = 0;
+			arr[1].start.hours = 14;
+			arr[1].end.hours = 14;
+			arr[1].start.minutes = 10;
+			arr[1].end.minutes = 20;
+			arr[2].start.hours = 11;
+			arr[2].end.hours = 15;
+			arr[2].start.minutes = 20;
+			arr[2].end.minutes = 30;
+			Assert::AreEqual(250, process(arr, i));
 		}
 	};
 }

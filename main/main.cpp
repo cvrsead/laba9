@@ -25,43 +25,18 @@ int main(){
 		  output(arr[j]);
   }
   fout << endl;
-  if (g == 1 && k == 1)
+  if (g == 1)
   {
-	  heapSort(times);
-	  removeDuplicates(times);
-	  for (int j = times.size() - 1; j >= 0; j--)
+	  heapSort(arr, i, k);
 		  for (int h = 0; h < i; h++)
-			  if (times[j] == arr[h].longer)
 				  output(arr[h]);
   }
-  if (g == 1 && k == 2) {
-	  for (int j = 0; j < i; j++)
-		  surnames.push_back(((arr[j].surname)[0])-0);
-	  heapSort(surnames);
-	  removeDuplicates(surnames);
-	  for (int j = 0; j<surnames.size(); j++)
-		  for (int h = 0; h < i; h++)
-			  if (surnames[j] == (arr[h].surname)[0])
-				  output(arr[h]);
-  }
-  if (g == 2 && k == 1)
+
+  if (g == 2)
   {
-	  mergeSort(times, 0, times.size() - 1);
-	  removeDuplicates(times);
-	  for (int j = 0; j < times.size(); j++)
-		  for (int h = 0; h < i; h++)
-			  if (times[j] == arr[h].longer)
-				  output(arr[h]);
-  }
-  if (g == 2 && k == 2) {
-	  for (int j = 0; j < i; j++)
-		  surnames.push_back(((arr[j].surname)[0]) - 0);
-	  mergeSort(surnames, 0, surnames.size() - 1);
-	  removeDuplicates(surnames);
-	  for (int j = surnames.size() - 1; j >= 0; j--)
-		  for (int h = 0; h < i; h++)
-			  if (surnames[j] == (arr[h].surname)[0])
-				  output(arr[h]);
+	  mergeSort(arr, 0, i - 1, k);
+	  for (int h = 0; h < i; h++)
+		  output(arr[h]);
   }
   return 0;
 }

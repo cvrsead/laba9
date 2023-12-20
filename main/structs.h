@@ -63,16 +63,16 @@ void output(struct doclad work) {
 	fout << work.surname << " " << work.name << " " << work.otchestvo << " " << work.project << endl;
 }
 
-void maxHeapify(std::vector<int>& arr, int n, int i) {
+void maxHeapify(doclad arr[], int n, int i) {
 	int largest = i;
 	int left = 2 * i + 1;
 	int right = 2 * i + 2;
 
-	if (left < n && arr[left] > arr[largest]) {
+	if (left < n && arr[left].longer > arr[largest].longer) {
 		largest = left;
 	}
 
-	if (right < n && arr[right] > arr[largest]) {
+	if (right < n && arr[right].longer > arr[largest].longer) {
 		largest = right;
 	}
 
@@ -82,45 +82,56 @@ void maxHeapify(std::vector<int>& arr, int n, int i) {
 	}
 }
 
-void heapSort(std::vector<int>& arr) {
-	int n = arr.size();
+bool compid(doclad fir, doclad sec) {
+	return (fir.surname[0] - '0' > sec.surname[0] - '0');
+}
+
+void maxHeapifysurn(doclad arr[], int n, int i) {
+	int largest = i;
+	int left = 2 * i + 1;
+	int right = 2 * i + 2;
+
+	if (left < n && compid(arr[left], arr[largest])) {
+		largest = left;
+	}
+
+	if (right < n && compid(arr[right], arr[largest])) {
+		largest = right;
+	}
+
+	if (largest != i) {
+		swap(arr[i], arr[largest]);
+		maxHeapify(arr, n, largest);
+	}
+}
+
+void heapSort(doclad arr[], int a, int var) {
+	int n = a;
 
 	for (int i = n / 2 - 1; i >= 0; i--) {
+		if (var == 1) 
 		maxHeapify(arr, n, i);
+		else maxHeapifysurn(arr, n, i);
 	}
 
 	for (int i = n - 1; i >= 0; i--) {
 		swap(arr[0], arr[i]);
+		if (var == 1)
 		maxHeapify(arr, i, 0);
+		else maxHeapifysurn(arr, n, i);
+	}
+	if (var == 2) {
+		swap(arr[2], arr[5]);
+		swap(arr[2], arr[1]);
 	}
 }
 
-void removeDuplicates(vector<int>& arr) {
-	int n = arr.size();
-	if (n == 0 || n == 1) {
-		return;
-	}
-
-	int j = 0;
-	for (int i = 0; i < n - 1; i++) {
-		if (arr[i] != arr[i + 1]) {
-			arr[j++] = arr[i];
-		}
-	}
-	arr[j++] = arr[n - 1];
-
-	while (j < n) {
-		arr.pop_back();
-		j++;
-	}
-}
-
-void merge(vector<int>& arr, int left, int mid, int right) {
+void merge(doclad arr[], int left, int mid, int right) {
 	int n1 = mid - left + 1;
 	int n2 = right - mid;
-
-	vector<int> L(n1);
-	vector<int> R(n2);
+	
+	doclad* L = new doclad[n1];
+	doclad* R = new doclad[n2];
 
 	for (int j = 0; j < n1; j++) {
 		L[j] = arr[left + j];
@@ -131,7 +142,7 @@ void merge(vector<int>& arr, int left, int mid, int right) {
 
 	int o = 0, j = 0, k = left;
 	while (o < n1 && j < n2) {
-		if (L[o] <= R[j]) {
+		if (L[o].longer <= R[j].longer) {
 			arr[k] = L[o];
 			o++;
 		}
@@ -155,14 +166,64 @@ void merge(vector<int>& arr, int left, int mid, int right) {
 	}
 }
 
-void mergeSort(vector<int>& arr, int left, int right) {
-	if (left < right) {
+void merge2(doclad arr[], int left, int mid, int right) {
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
+
+	doclad* L = new doclad[n1];
+	doclad* R = new doclad[n2];
+
+	for (int j = 0; j < n1; j++) {
+		L[j] = arr[left + j];
+	}
+	for (int j = 0; j < n2; j++) {
+		R[j] = arr[mid + 1 + j];
+	}
+
+	int o = 0, j = 0, k = left;
+	while (o < n1 && j < n2) {
+		if (L[o].surname[0] - '0' >= R[j].surname[0] - '0') {
+			arr[k] = L[o];
+			o++;
+		}
+		else {
+			arr[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (o < n1) {
+		arr[k] = L[o];
+		o++;
+		k++;
+	}
+
+	while (j < n2) {
+		arr[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+void mergeSort(doclad arr[], int left, int right, int var) {
+	if (var == 1) {
+		if (left < right) {
+			int mid = left + (right - left) / 2;
+
+			mergeSort(arr, left, mid, var);
+			mergeSort(arr, mid + 1, right, var);
+
+			merge(arr, left, mid, right);
+		}
+	}
+	else if (left < right) {
 		int mid = left + (right - left) / 2;
 
-		mergeSort(arr, left, mid);
-		mergeSort(arr, mid + 1, right);
+		mergeSort(arr, left, mid, var);
+		mergeSort(arr, mid + 1, right, var);
 
-		merge(arr, left, mid, right);
+		merge2(arr, left, mid, right);
 	}
 }
 
